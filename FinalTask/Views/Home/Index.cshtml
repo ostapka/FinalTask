@@ -1,0 +1,49 @@
+﻿@using FinalTask.Controllers;
+@{
+    /**/
+
+    ViewBag.Title = "Home Page";
+}
+
+@section styles
+{
+<link rel="stylesheet" type="text/css" href="~/Content/StyleSheet.css">
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-8 col-md-8">
+            <p>Click on the map to add markers.</p>
+            <div id="floating-panel">
+                <input onclick="clearMarkers();" type=button value="Hide Markers">
+                <input onclick="showMarkers();" type=button value="Show All Markers">
+                <input onclick="deleteMarkers();" type=button value="Delete Markers">
+            </div>
+            <div id="map"></div>
+        </div>
+        <div class="col-xs-4 col-md-4">
+            <p><img src="http://maps.google.com/mapfiles/ms/icons/green-dot.png"> My Choose List</p>
+            <div id="list" class="list-group">
+
+            </div>
+            <input onclick="addition();" type=button value="Submit">
+        </div>
+    </div>
+    <div id="wishedList">
+        <p><img src="http://maps.google.com/mapfiles/ms/icons/blue-dot.png"> My Wished List</p>
+        @Html.Partial("~/Views/Home/Partial.cshtml", new HomeController().GetTowns())
+        <input onclick="getVisitedCity();" type=button value="Submit">
+    </div>
+    <div id="visitedList">
+        <p><img src="http://maps.google.com/mapfiles/ms/icons/red-dot.png"> My Visited List</p>
+        @Html.Partial("~/Views/Home/PartialVisited.cshtml", new HomeController().GetVisitedTowns())
+    </div>
+</div>
+
+@section scripts
+{
+    <script src="~/Scripts/AppScripts/InitMap.js"></script >
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCpluAl9IYDIVikPKomDJidfqz_67jJYqo&libraries=geometry&v=3&language=en&callback=initMap">
+    </script>
+}

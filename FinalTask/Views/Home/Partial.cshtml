@@ -1,0 +1,16 @@
+﻿@using FinalTask.Models;
+@using NonFactors.Mvc.Grid;
+
+@model IList<Town>
+
+@(Html
+        .Grid(Model)
+        .Build(columns =>
+        {
+            columns.Add(model => model.Id).Css("hidden id");
+            columns.Add(model => Html.CheckBox("visited", model.Visited, new { @class = "checkbox" })).Titled("Visited");
+            columns.Add(model => model.Name).Titled("City Name");
+            columns.Add(model => model.WikiInfo).Titled("WikiInfo").Encoded(false);
+            columns.Add(model => model.WikiImage).Titled("WikiImage").Encoded(false);
+        })
+        .Css("example-table"))
